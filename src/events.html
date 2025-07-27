@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="output.css" />
     <title>Events</title>
   </head>
-  <body>
+  <body class="bg-gray-900" style="background-color: #111827">
     <!-- Mobile sidebar toggle button -->
     <button
       data-drawer-target="default-sidebar"
@@ -172,231 +172,548 @@
 
     <!-- Main content -->
     <div class="p-4 sm:ml-64">
-      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+      <div
+        class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700"
+      >
         <!-- Header -->
-        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
+        <div
+          class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6"
+        >
           <div>
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Events</h2>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">Manage your events and track their performance</p>
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+              Events
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+              Manage your events and track their performance
+            </p>
           </div>
           <a href="create-event.html">
-            <button class="w-full sm:w-auto px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            <button
+              class="w-full sm:w-auto px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
               Create New Event
             </button>
           </a>
         </div>
 
         <!-- Event Cards (Mobile/Tablet View) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-8 lg:hidden">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-8 lg:hidden"
+        >
           <!-- Event Card 1 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Tech Conference 2025</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">February 15, 2025 at 9:00 AM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 San Francisco, CA</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Tech Conference 2025
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              February 15, 2025 at 9:00 AM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 San Francisco, CA
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+              >
                 Upcoming
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">245 tickets sold</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >245 tickets sold</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Edit</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View Details</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                View Details
+              </button>
             </div>
           </div>
 
           <!-- Event Card 2 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Web Dev Workshop</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">March 8, 2025 at 2:00 PM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 New York, NY</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Web Dev Workshop
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              March 8, 2025 at 2:00 PM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 New York, NY
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
+              >
                 Registration Open
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">89 tickets sold</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >89 tickets sold</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Edit</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View Details</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                View Details
+              </button>
             </div>
           </div>
 
           <!-- Event Card 3 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Business Networking</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">January 20, 2025 at 6:00 PM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 Los Angeles, CA</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Business Networking
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              January 20, 2025 at 6:00 PM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 Los Angeles, CA
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100"
+              >
                 Past Event
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">156 attended</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >156 attended</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">View Report</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View Details</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                View Report
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                View Details
+              </button>
             </div>
           </div>
 
           <!-- Event Card 4 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Design Masterclass</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">April 12, 2025 at 10:00 AM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 Austin, TX</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Design Masterclass
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              April 12, 2025 at 10:00 AM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 Austin, TX
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100"
+              >
                 Draft
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">Not published</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >Not published</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Edit</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">Publish</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                Publish
+              </button>
             </div>
           </div>
 
           <!-- Event Card 5 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Marketing Summit</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">May 25, 2025 at 1:00 PM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 Chicago, IL</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Marketing Summit
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              May 25, 2025 at 1:00 PM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 Chicago, IL
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+              >
                 Upcoming
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">67 tickets sold</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >67 tickets sold</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Edit</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View Details</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                View Details
+              </button>
             </div>
           </div>
 
           <!-- Event Card 6 -->
-          <div class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Startup Pitch Night</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">June 10, 2025 at 7:00 PM</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">📍 Seattle, WA</p>
+          <div
+            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              Startup Pitch Night
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              June 10, 2025 at 7:00 PM
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              📍 Seattle, WA
+            </p>
             <div class="flex items-center justify-between mt-4">
-              <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">
+              <span
+                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
+              >
                 Registration Open
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">34 tickets sold</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"
+                >34 tickets sold</span
+              >
             </div>
             <div class="flex gap-2 mt-3">
-              <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Edit</button>
-              <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View Details</button>
+              <button
+                class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Edit
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                View Details
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Events Table (Desktop View) -->
-        <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden hidden lg:block">
+        <div
+          class="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden hidden lg:block"
+        >
           <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <table
+              class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
+            >
               <thead class="bg-gray-50 dark:bg-gray-700">
                 <tr>
-                  <th class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Event</th>
-                  <th class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date & Time</th>
-                  <th class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Location</th>
-                  <th class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                  <th class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tickets Sold</th>
-                  <th class="px-3 py-3 sm:px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Event
+                  </th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Date & Time
+                  </th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Location
+                  </th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Tickets Sold
+                  </th>
+                  <th
+                    class="px-3 py-3 sm:px-6 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Actions
+                  </th>
                 </tr>
               </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody
+                class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700"
+              >
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-3 py-4 sm:px-6">
-                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Tech Conference 2025</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Annual technology conference</div>
+                    <div
+                      class="text-sm font-medium text-gray-900 dark:text-gray-100"
+                    >
+                      Tech Conference 2025
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                      Annual technology conference
+                    </div>
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Feb 15, 2025<br>9:00 AM</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">San Francisco, CA</td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Feb 15, 2025<br />9:00 AM
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    San Francisco, CA
+                  </td>
                   <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">Upcoming</span>
+                    <span
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+                      >Upcoming</span
+                    >
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">245</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium">
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    245
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
+                  >
                     <div class="flex justify-end gap-2">
-                      <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
-                      <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View</button>
+                      <button
+                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+                      >
+                        View
+                      </button>
                     </div>
                   </td>
                 </tr>
 
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-3 py-4 sm:px-6">
-                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Web Dev Workshop</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Hands-on web development</div>
+                    <div
+                      class="text-sm font-medium text-gray-900 dark:text-gray-100"
+                    >
+                      Web Dev Workshop
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                      Hands-on web development
+                    </div>
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Mar 8, 2025<br>2:00 PM</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">New York, NY</td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Mar 8, 2025<br />2:00 PM
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    New York, NY
+                  </td>
                   <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">Registration Open</span>
+                    <span
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
+                      >Registration Open</span
+                    >
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">89</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium">
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    89
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
+                  >
                     <div class="flex justify-end gap-2">
-                      <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
-                      <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View</button>
+                      <button
+                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+                      >
+                        View
+                      </button>
                     </div>
                   </td>
                 </tr>
 
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-3 py-4 sm:px-6">
-                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Business Networking</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Professional networking event</div>
+                    <div
+                      class="text-sm font-medium text-gray-900 dark:text-gray-100"
+                    >
+                      Business Networking
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                      Professional networking event
+                    </div>
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Jan 20, 2025<br>6:00 PM</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Los Angeles, CA</td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Jan 20, 2025<br />6:00 PM
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Los Angeles, CA
+                  </td>
                   <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100">Past Event</span>
+                    <span
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100"
+                      >Past Event</span
+                    >
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">156</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium">
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    156
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
+                  >
                     <div class="flex justify-end gap-2">
-                      <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Report</button>
-                      <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View</button>
+                      <button
+                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Report
+                      </button>
+                      <button
+                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+                      >
+                        View
+                      </button>
                     </div>
                   </td>
                 </tr>
 
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-3 py-4 sm:px-6">
-                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Design Masterclass</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Advanced design workshop</div>
+                    <div
+                      class="text-sm font-medium text-gray-900 dark:text-gray-100"
+                    >
+                      Design Masterclass
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                      Advanced design workshop
+                    </div>
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Apr 12, 2025<br>10:00 AM</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Austin, TX</td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Apr 12, 2025<br />10:00 AM
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Austin, TX
+                  </td>
                   <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100">Draft</span>
+                    <span
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100"
+                      >Draft</span
+                    >
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">-</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium">
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    -
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
+                  >
                     <div class="flex justify-end gap-2">
-                      <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
-                      <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">Publish</button>
+                      <button
+                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+                      >
+                        Publish
+                      </button>
                     </div>
                   </td>
                 </tr>
 
                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                   <td class="px-3 py-4 sm:px-6">
-                    <div class="text-sm font-medium text-gray-900 dark:text-gray-100">Marketing Summit</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Digital marketing strategies</div>
+                    <div
+                      class="text-sm font-medium text-gray-900 dark:text-gray-100"
+                    >
+                      Marketing Summit
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                      Digital marketing strategies
+                    </div>
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">May 25, 2025<br>1:00 PM</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">Chicago, IL</td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    May 25, 2025<br />1:00 PM
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    Chicago, IL
+                  </td>
                   <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">Upcoming</span>
+                    <span
+                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+                      >Upcoming</span
+                    >
                   </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">67</td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium">
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                  >
+                    67
+                  </td>
+                  <td
+                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
+                  >
                     <div class="flex justify-end gap-2">
-                      <button class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Edit</button>
-                      <button class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200">View</button>
+                      <button
+                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+                      >
+                        View
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -408,22 +725,35 @@
         <!-- Pagination -->
         <div class="flex items-center justify-between mt-6">
           <div class="text-sm text-gray-700 dark:text-gray-300">
-            Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">12</span> results
+            Showing <span class="font-medium">1</span> to
+            <span class="font-medium">5</span> of
+            <span class="font-medium">12</span> results
           </div>
           <div class="flex space-x-1">
-            <button class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400" disabled>
+            <button
+              class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+              disabled
+            >
               Previous
             </button>
-            <button class="px-3 py-2 text-sm text-white bg-blue-600 border border-blue-600 rounded-md">
+            <button
+              class="px-3 py-2 text-sm text-white bg-blue-600 border border-blue-600 rounded-md"
+            >
               1
             </button>
-            <button class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+            <button
+              class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+            >
               2
             </button>
-            <button class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+            <button
+              class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+            >
               3
             </button>
-            <button class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+            <button
+              class="px-3 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+            >
               Next
             </button>
           </div>
@@ -433,20 +763,26 @@
 
     <script>
       // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector('[data-drawer-toggle="default-sidebar"]');
-      const sidebar = document.getElementById('default-sidebar');
-      
+      const sidebarToggle = document.querySelector(
+        '[data-drawer-toggle="default-sidebar"]'
+      );
+      const sidebar = document.getElementById("default-sidebar");
+
       if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('-translate-x-full');
+        sidebarToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("-translate-x-full");
         });
       }
-      
+
       // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth < 640) { // sm breakpoint
-          if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.add('-translate-x-full');
+      document.addEventListener("click", (e) => {
+        if (window.innerWidth < 640) {
+          // sm breakpoint
+          if (
+            !sidebar.contains(e.target) &&
+            !sidebarToggle.contains(e.target)
+          ) {
+            sidebar.classList.add("-translate-x-full");
           }
         }
       });
