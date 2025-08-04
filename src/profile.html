@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
+    <script defer src="./js/toggleSidebar.js"></script>
     <title>Profile</title>
   </head>
   <body class="bg-gray-900" style="background-color: #111827">
@@ -581,78 +582,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector(
-        '[data-drawer-toggle="default-sidebar"]'
-      );
-      const sidebar = document.getElementById("default-sidebar");
-
-      if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener("click", () => {
-          sidebar.classList.toggle("-translate-x-full");
-        });
-      }
-
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener("click", (e) => {
-        if (window.innerWidth < 640) {
-          // sm breakpoint
-          if (
-            !sidebar.contains(e.target) &&
-            !sidebarToggle.contains(e.target)
-          ) {
-            sidebar.classList.add("-translate-x-full");
-          }
-        }
-      });
-
-      // Profile picture upload
-      document
-        .getElementById("profile-picture")
-        .addEventListener("change", function (e) {
-          if (e.target.files && e.target.files[0]) {
-            alert(
-              "Profile picture upload functionality would be implemented here."
-            );
-          }
-        });
-
-      // Form submissions
-      document.querySelectorAll("form").forEach((form) => {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          if (this.querySelector("#current-password")) {
-            alert("Password updated successfully!");
-          } else {
-            alert("Profile information updated successfully!");
-          }
-        });
-      });
-
-      // Logout functionality
-      document
-        .getElementById("logout-btn")
-        .addEventListener("click", function () {
-          if (confirm("Are you sure you want to logout?")) {
-            alert("Logout functionality would redirect to login page.");
-            // window.location.href = 'login.html';
-          }
-        });
-
-      // Delete account functionality
-      document
-        .querySelector('button[class*="bg-red-600"]')
-        .addEventListener("click", function () {
-          if (
-            confirm(
-              "Are you sure you want to delete your account? This action cannot be undone."
-            )
-          ) {
-            alert("Account deletion functionality would be implemented here.");
-          }
-        });
-    </script>
   </body>
 </html>

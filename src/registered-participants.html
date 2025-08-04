@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
+    <script defer src="./js/toggleSidebar.js"></script>
     <title>Participants</title>
   </head>
   <body class="bg-gray-900" style="background-color: #111827">
@@ -1077,51 +1078,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector(
-        '[data-drawer-toggle="default-sidebar"]'
-      );
-      const sidebar = document.getElementById("default-sidebar");
-
-      if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener("click", () => {
-          sidebar.classList.toggle("-translate-x-full");
-        });
-      }
-
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener("click", (e) => {
-        if (window.innerWidth < 640) {
-          // sm breakpoint
-          if (
-            !sidebar.contains(e.target) &&
-            !sidebarToggle.contains(e.target)
-          ) {
-            sidebar.classList.add("-translate-x-full");
-          }
-        }
-      });
-
-      // Search functionality
-      const searchInput = document.getElementById("search");
-      if (searchInput) {
-        searchInput.addEventListener("input", function (e) {
-          const searchTerm = e.target.value.toLowerCase();
-          // Add search logic here
-          console.log("Searching for:", searchTerm);
-        });
-      }
-
-      // Filter functionality
-      const filters = document.querySelectorAll("select");
-      filters.forEach((filter) => {
-        filter.addEventListener("change", function (e) {
-          console.log("Filter changed:", e.target.value);
-          // Add filter logic here
-        });
-      });
-    </script>
   </body>
 </html>

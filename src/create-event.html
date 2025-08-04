@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
+    <script defer src="./js/toggleSidebar.js"></script>
     <title>Create Event</title>
   </head>
   <body class="bg-gray-900" style="background-color: #111827">
@@ -763,128 +764,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector(
-        '[data-drawer-toggle="default-sidebar"]'
-      );
-      const sidebar = document.getElementById("default-sidebar");
-
-      if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener("click", () => {
-          sidebar.classList.toggle("-translate-x-full");
-        });
-      }
-
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener("click", (e) => {
-        if (window.innerWidth < 640) {
-          // sm breakpoint
-          if (
-            !sidebar.contains(e.target) &&
-            !sidebarToggle.contains(e.target)
-          ) {
-            sidebar.classList.add("-translate-x-full");
-          }
-        }
-      });
-
-      // Form functionality
-      const locationRadios = document.querySelectorAll(
-        'input[name="location-type"]'
-      );
-      const physicalLocation = document.getElementById("physical-location");
-      const virtualLocation = document.getElementById("virtual-location");
-
-      const ticketRadios = document.querySelectorAll(
-        'input[name="ticket-type"]'
-      );
-      const pricingSection = document.getElementById("pricing-section");
-
-      // Handle location type changes
-      locationRadios.forEach((radio) => {
-        radio.addEventListener("change", (e) => {
-          if (e.target.value === "virtual") {
-            physicalLocation.classList.add("hidden");
-            virtualLocation.classList.remove("hidden");
-          } else if (e.target.value === "in-person") {
-            physicalLocation.classList.remove("hidden");
-            virtualLocation.classList.add("hidden");
-          } else if (e.target.value === "hybrid") {
-            physicalLocation.classList.remove("hidden");
-            virtualLocation.classList.remove("hidden");
-          }
-        });
-      });
-
-      // Handle ticket type changes
-      ticketRadios.forEach((radio) => {
-        radio.addEventListener("change", (e) => {
-          if (e.target.value === "paid") {
-            pricingSection.classList.remove("hidden");
-          } else {
-            pricingSection.classList.add("hidden");
-          }
-        });
-      });
-
-      // Form validation
-      const form = document.querySelector("form");
-      const startDateInput = document.getElementById("start-date");
-      const endDateInput = document.getElementById("end-date");
-      const startTimeInput = document.getElementById("start-time");
-      const endTimeInput = document.getElementById("end-time");
-
-      // Set minimum date to today
-      const today = new Date().toISOString().split("T")[0];
-      startDateInput.min = today;
-      endDateInput.min = today;
-
-      // Update end date minimum when start date changes
-      startDateInput.addEventListener("change", (e) => {
-        endDateInput.min = e.target.value;
-        if (endDateInput.value && endDateInput.value < e.target.value) {
-          endDateInput.value = e.target.value;
-        }
-      });
-
-      // Validate end time when on same day
-      function validateTime() {
-        if (startDateInput.value === endDateInput.value) {
-          if (
-            startTimeInput.value &&
-            endTimeInput.value &&
-            startTimeInput.value >= endTimeInput.value
-          ) {
-            endTimeInput.setCustomValidity("End time must be after start time");
-          } else {
-            endTimeInput.setCustomValidity("");
-          }
-        } else {
-          endTimeInput.setCustomValidity("");
-        }
-      }
-
-      startTimeInput.addEventListener("change", validateTime);
-      endTimeInput.addEventListener("change", validateTime);
-      endDateInput.addEventListener("change", validateTime);
-
-      // Form submission
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        // Basic validation
-        validateTime();
-
-        if (form.checkValidity()) {
-          // Show success message (you can replace this with actual form submission)
-          alert("Event created successfully! Redirecting to events page...");
-          // window.location.href = 'src/events.html';
-        } else {
-          form.reportValidity();
-        }
-      });
-    </script>
   </body>
 </html>

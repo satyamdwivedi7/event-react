@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
+    <script defer src="./js/toggleSidebar.js"></script>
     <title>Events</title>
   </head>
   <body class="bg-gray-900" style="background-color: #111827">
@@ -760,32 +761,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector(
-        '[data-drawer-toggle="default-sidebar"]'
-      );
-      const sidebar = document.getElementById("default-sidebar");
-
-      if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener("click", () => {
-          sidebar.classList.toggle("-translate-x-full");
-        });
-      }
-
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener("click", (e) => {
-        if (window.innerWidth < 640) {
-          // sm breakpoint
-          if (
-            !sidebar.contains(e.target) &&
-            !sidebarToggle.contains(e.target)
-          ) {
-            sidebar.classList.add("-translate-x-full");
-          }
-        }
-      });
-    </script>
   </body>
 </html>

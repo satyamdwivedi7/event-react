@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="output.css" rel="stylesheet" />
+    <script defer src="./js/toggleSidebar.js"></script>
+    <script defer src="./js/chart.js"></script>
     <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
@@ -458,73 +460,5 @@
         </div>
       </div>
     </div>
-
-    <script>
-      // Toggle sidebar functionality
-      const sidebarToggle = document.querySelector('[data-drawer-toggle="default-sidebar"]');
-      const sidebar = document.getElementById('default-sidebar');
-      
-      if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('-translate-x-full');
-        });
-      }
-      
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth < 640) { // sm breakpoint
-          if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            sidebar.classList.add('-translate-x-full');
-          }
-        }
-      });
-
-      // Registration trends chart
-      const ctx = document.getElementById('registrationChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [{
-            label: 'Registrations',
-            data: [65, 89, 134, 156, 178, 245],
-            borderColor: 'rgb(59, 130, 246)',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            tension: 0.4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: 'rgba(156, 163, 175, 0.2)'
-              }
-            },
-            x: {
-              grid: {
-                color: 'rgba(156, 163, 175, 0.2)'
-              }
-            }
-          }
-        }
-      });
-
-      // Quick action button functionality
-      document.querySelectorAll('button').forEach(button => {
-        if (button.textContent.includes('Send Notification')) {
-          button.addEventListener('click', () => {
-            alert('Notification feature would be implemented here!');
-          });
-        }
-      });
-    </script>
   </body>
 </html>
