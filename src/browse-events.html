@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <script defer src="./js/toggleSidebar.js"></script>
+    <title>Register for Events</title>
+    <style>
+      /* Smooth scrolling for modal */
+      #registration-modal {
+        -webkit-overflow-scrolling: touch;
+      }
+      #registration-modal > div > div {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+      }
+      #registration-modal > div > div::-webkit-scrollbar {
+        width: 8px;
+      }
+      #registration-modal > div > div::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      #registration-modal > div > div::-webkit-scrollbar-thumb {
+        background-color: rgba(155, 155, 155, 0.5);
+        border-radius: 20px;
+        border: transparent;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900" style="background-color: #111827">
+    <button
+      data-drawer-target="default-sidebar"
+      data-drawer-toggle="default-sidebar"
+      aria-controls="default-sidebar"
+      type="button"
+      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    >
+      <span class="sr-only">Open sidebar</span>
+      <svg
+        class="w-6 h-6"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          fill-rule="evenodd"
+          d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+        ></path>
+      </svg>
+    </button>
+
+    <aside
+      id="default-sidebar"
+      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      aria-label="Sidebar"
+    >
+      <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <ul class="space-y-2 font-medium">
+          <li>
+            <a
+              href="index.html"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 22 21"
+              >
+                <path
+                  d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
+                />
+                <path
+                  d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
+                />
+              </svg>
+              <span class="ms-3">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="events.html"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">My Events</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="browse-events.html"
+              class="flex items-center p-2 text-white bg-gray-700 rounded-lg dark:bg-gray-700 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-white transition duration-75"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Register for Events</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="registered-participants.html"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 18"
+              >
+                <path
+                  d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Participants</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="profile.html"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 0C4.612 0 0 4.612 0 10c0 5.388 4.612 10 10 10s10-4.612 10-10C20 4.612 15.388 0 10 0zM8.5 6.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM10 18a8 8 0 01-6.134-2.863c.19-.632.837-1.137 1.534-1.137h9.2c.697 0 1.344.505 1.534 1.137A8 8 0 0110 18z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="p-4 sm:ml-64">
+      <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <!-- Header -->
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
+          <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">
+            Register for Events
+          </h1>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search events..."
+              class="px-4 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button
+            data-filter="all"
+            class="filter-btn px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            All Events
+          </button>
+          <button
+            data-filter="free"
+            class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
+          >
+            Free Events
+          </button>
+          <button
+            data-filter="paid"
+            class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
+          >
+            Paid Events
+          </button>
+        </div>
+
+        <!-- Events Grid -->
+        <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Events will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal" class="hidden" style="position: fixed; inset: 0; z-index: 9999; display: none; align-items: flex-start; justify-content: center; padding: 2rem 1rem; background-color: rgba(0, 0, 0, 0.75); overflow-y: auto;">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full" style="position: relative; z-index: 10000; max-width: 42rem; max-height: calc(100vh - 4rem); display: flex; flex-direction: column;">
+        <div class="flex-1 overflow-y-auto" style="max-height: calc(100vh - 4rem);">
+          <div class="p-6">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+              Event Registration
+            </h2>
+            <button id="close-modal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Event Info -->
+          <div id="modal-event-info" class="mb-6 p-4 bg-blue-50 dark:bg-gray-700 rounded-lg">
+            <!-- Event details will be shown here -->
+          </div>
+
+          <!-- Registration Form -->
+          <form id="registration-form" class="space-y-6">
+            <!-- Participant Information Section -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                Participant Information
+              </h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- First Name -->
+                <div>
+                  <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="first-name"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="John"
+                  />
+                </div>
+
+                <!-- Last Name -->
+                <div>
+                  <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="last-name"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Doe"
+                  />
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="john.doe@example.com"
+                  />
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+
+                <!-- Organization (Optional) -->
+                <div>
+                  <label for="organization" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Company name"
+                  />
+                </div>
+
+                <!-- Job Title (Optional) -->
+                <div>
+                  <label for="job-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Job Title
+                  </label>
+                  <input
+                    type="text"
+                    id="job-title"
+                    name="job-title"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Software Engineer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Ticket Type -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ticket Type *
+              </label>
+              <select
+                id="ticket-type"
+                name="ticket-type"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="regular">Regular</option>
+                <option value="early-bird">Early Bird</option>
+                <option value="vip">VIP</option>
+                <option value="student">Student</option>
+                <option value="group">Group</option>
+              </select>
+            </div>
+
+            <!-- Dietary Restrictions -->
+            <div>
+              <label for="dietary-restrictions" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Dietary Restrictions
+              </label>
+              <textarea
+                id="dietary-restrictions"
+                name="dietary-restrictions"
+                rows="2"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="E.g., Vegetarian, Vegan, Gluten-free, Allergies..."
+              ></textarea>
+            </div>
+
+            <!-- Special Requests -->
+            <div>
+              <label for="special-requests" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Special Requests
+              </label>
+              <textarea
+                id="special-requests"
+                name="special-requests"
+                rows="2"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Any special accommodations or requests..."
+              ></textarea>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                Emergency Contact
+              </h3>
+              
+              <div class="space-y-4">
+                <div>
+                  <label for="emergency-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="emergency-name"
+                    name="emergency-name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Emergency contact name"
+                  />
+                </div>
+
+                <div>
+                  <label for="emergency-phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="emergency-phone"
+                    name="emergency-phone"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+
+                <div>
+                  <label for="emergency-relationship" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Relationship
+                  </label>
+                  <input
+                    type="text"
+                    id="emergency-relationship"
+                    name="emergency-relationship"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="E.g., Spouse, Parent, Sibling, Friend"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                id="cancel-btn"
+                class="flex-1 px-6 py-2 text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="flex-1 px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Authentication Check -->
+    <script type="module" src="./js/auth-check.js"></script>
+    <script type="module" src="./js/browse-events.js"></script>
+  </body>
+</html>

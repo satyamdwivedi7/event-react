@@ -5,7 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
     <script defer src="./js/toggleSidebar.js"></script>
+    <script type="module" src="./js/auth-check.js"></script>
+    <script type="module" src="./js/registered-participants.js"></script>
     <title>Participants</title>
+    <style>
+      /* Preserve badge colors - ensure they're visible */
+      .bg-yellow-400 {
+        background-color: #fbbf24 !important;
+        color: #1f2937 !important;
+      }
+      
+      .bg-green-500 {
+        background-color: #10b981 !important;
+        color: white !important;
+      }
+      
+      .bg-red-500 {
+        background-color: #ef4444 !important;
+        color: white !important;
+      }
+      
+      .bg-blue-500 {
+        background-color: #3b82f6 !important;
+        color: white !important;
+      }
+      
+      .bg-purple-500 {
+        background-color: #a855f7 !important;
+        color: white !important;
+      }
+      
+      .bg-gray-500 {
+        background-color: #6b7280 !important;
+        color: white !important;
+      }
+    </style>
   </head>
   <body class="bg-gray-900" style="background-color: #111827">
     <!-- Mobile sidebar toggle button -->
@@ -79,6 +113,23 @@
                 />
               </svg>
               <span class="flex-1 ms-3 whitespace-nowrap">Events</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="browse-events.html"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Register for Events</span>
             </a>
           </li>
           <li>
@@ -357,25 +408,25 @@
             <!-- Event Filter -->
             <div class="w-full md:w-48">
               <select
+                id="event-filter"
                 class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option>All Events</option>
-                <option>Tech Conference 2025</option>
-                <option>Web Dev Workshop</option>
-                <option>Business Networking</option>
-                <option>Design Masterclass</option>
+                <option value="all">All Events</option>
               </select>
             </div>
 
             <!-- Status Filter -->
             <div class="w-full md:w-32">
               <select
+                id="status-filter"
                 class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               >
-                <option>All Status</option>
-                <option>Confirmed</option>
-                <option>Pending</option>
-                <option>Cancelled</option>
+                <option value="all">All Status</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="pending">Pending</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="waitlisted">Waitlisted</option>
+                <option value="attended">Attended</option>
               </select>
             </div>
           </div>
@@ -383,307 +434,10 @@
 
         <!-- Participants Cards (Mobile/Tablet View) -->
         <div
+          id="participants-content"
           class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 mb-8 lg:hidden"
         >
-          <!-- Participant Card 1 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  JD
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  John Doe
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  john.doe@example.com
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Tech Conference 2025
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 15, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-              >
-                Confirmed
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Participant Card 2 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  JS
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  Jane Smith
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  jane.smith@company.com
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Web Dev Workshop
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 12, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
-              >
-                Pending
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Participant Card 3 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  MJ
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  Michael Johnson
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  m.johnson@startup.co
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Business Networking
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 10, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-              >
-                Confirmed
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Participant Card 4 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  EB
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  Emily Brown
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  emily.brown@design.agency
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Design Masterclass
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 8, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100"
-              >
-                Cancelled
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Participant Card 5 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  DW
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  David Wilson
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  david.wilson@tech.com
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Tech Conference 2025
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 5, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-              >
-                Confirmed
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Participant Card 6 -->
-          <div
-            class="p-4 bg-white rounded-md shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-          >
-            <div class="flex items-start space-x-3">
-              <div class="flex-shrink-0">
-                <div
-                  class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-semibold"
-                >
-                  SD
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3
-                  class="text-lg font-semibold text-gray-800 dark:text-white truncate"
-                >
-                  Sarah Davis
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 truncate">
-                  sarah.davis@freelance.io
-                </p>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Web Dev Workshop
-                </p>
-                <p class="text-xs text-gray-400 dark:text-gray-500">
-                  Registered: Jan 3, 2025
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between mt-4">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
-              >
-                Pending
-              </span>
-              <div class="flex gap-2">
-                <button
-                  class="px-2 py-1 text-xs text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  View
-                </button>
-                <button
-                  class="px-2 py-1 text-xs text-gray-700 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                >
-                  Edit
-                </button>
-              </div>
-            </div>
-          </div>
+          <!-- Cards will be dynamically populated by JavaScript -->
         </div>
 
         <!-- Participants Table (Desktop View) -->
@@ -731,310 +485,7 @@
               <tbody
                 class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700"
               >
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td class="px-3 py-4 sm:px-6">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <div
-                          class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold"
-                        >
-                          JD
-                        </div>
-                      </div>
-                      <div class="ml-4">
-                        <div
-                          class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                        >
-                          John Doe
-                        </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                          john.doe@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Tech Conference 2025
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Jan 15, 2025
-                  </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-                      >Confirmed</span
-                    >
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Regular
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
-                  >
-                    <div class="flex justify-end gap-2">
-                      <button
-                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        View
-                      </button>
-                      <button
-                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td class="px-3 py-4 sm:px-6">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <div
-                          class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold"
-                        >
-                          JS
-                        </div>
-                      </div>
-                      <div class="ml-4">
-                        <div
-                          class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                        >
-                          Jane Smith
-                        </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                          jane.smith@company.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Web Dev Workshop
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Jan 12, 2025
-                  </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
-                      >Pending</span
-                    >
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Early Bird
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
-                  >
-                    <div class="flex justify-end gap-2">
-                      <button
-                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        View
-                      </button>
-                      <button
-                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td class="px-3 py-4 sm:px-6">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <div
-                          class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold"
-                        >
-                          MJ
-                        </div>
-                      </div>
-                      <div class="ml-4">
-                        <div
-                          class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                        >
-                          Michael Johnson
-                        </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                          m.johnson@startup.co
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Business Networking
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Jan 10, 2025
-                  </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-                      >Confirmed</span
-                    >
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    VIP
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
-                  >
-                    <div class="flex justify-end gap-2">
-                      <button
-                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        View
-                      </button>
-                      <button
-                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td class="px-3 py-4 sm:px-6">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <div
-                          class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white font-semibold"
-                        >
-                          EB
-                        </div>
-                      </div>
-                      <div class="ml-4">
-                        <div
-                          class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                        >
-                          Emily Brown
-                        </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                          emily.brown@design.agency
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Design Masterclass
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Jan 8, 2025
-                  </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100"
-                      >Cancelled</span
-                    >
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Regular
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
-                  >
-                    <div class="flex justify-end gap-2">
-                      <button
-                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        View
-                      </button>
-                      <button
-                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td class="px-3 py-4 sm:px-6">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0">
-                        <div
-                          class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white font-semibold"
-                        >
-                          DW
-                        </div>
-                      </div>
-                      <div class="ml-4">
-                        <div
-                          class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                        >
-                          David Wilson
-                        </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                          david.wilson@tech.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Tech Conference 2025
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Jan 5, 2025
-                  </td>
-                  <td class="px-3 py-4 sm:px-6 whitespace-nowrap">
-                    <span
-                      class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-                      >Confirmed</span
-                    >
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
-                  >
-                    Early Bird
-                  </td>
-                  <td
-                    class="px-3 py-4 sm:px-6 whitespace-nowrap text-right text-sm font-medium"
-                  >
-                    <div class="flex justify-end gap-2">
-                      <button
-                        class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        View
-                      </button>
-                      <button
-                        class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                <!-- Table rows will be dynamically populated by JavaScript -->
               </tbody>
             </table>
           </div>
@@ -1075,6 +526,333 @@
               Next
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Participant Modal -->
+    <div
+      id="view-modal"
+      class="hidden fixed inset-0 items-center justify-center p-4"
+      style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);"
+    >
+      <!-- Modal content -->
+      <div
+        id="view-modal-content"
+        class="relative w-full max-w-3xl bg-white dark:bg-gray-800 rounded-lg shadow-xl"
+        style="max-height: calc(100vh - 4rem); overflow-y: auto;"
+      >
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Edit Participant Modal -->
+    <div
+      id="edit-modal"
+      class="hidden fixed inset-0 items-center justify-center p-4"
+      style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);"
+    >
+      <!-- Modal content -->
+      <div
+        class="relative w-full max-w-4xl bg-white dark:bg-gray-800 rounded-lg shadow-xl"
+        style="max-height: calc(100vh - 4rem); overflow-y: auto;"
+      >
+        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Edit Registration
+            </h3>
+            <button
+              id="close-edit-modal"
+              type="button"
+              class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+          <form id="edit-form" class="overflow-y-auto" style="max-height: calc(100vh - 10rem);">
+            <!-- Participant Information -->
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Participant Information
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="edit-firstName"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-firstName"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-lastName"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-lastName"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-email"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="edit-email"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-phone"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Phone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="edit-phone"
+                    required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-organization"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-organization"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-jobTitle"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Job Title
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-jobTitle"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Registration Details -->
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Registration Details
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="edit-status"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Status
+                  </label>
+                  <select
+                    id="edit-status"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="cancelled">Cancelled</option>
+                    <option value="waitlisted">Waitlisted</option>
+                    <option value="attended">Attended</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="edit-ticketType"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Ticket Type
+                  </label>
+                  <select
+                    id="edit-ticketType"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    <option value="regular">Regular</option>
+                    <option value="early-bird">Early Bird</option>
+                    <option value="vip">VIP</option>
+                    <option value="student">Student</option>
+                    <option value="group">Group</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="edit-paymentStatus"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Payment Status
+                  </label>
+                  <select
+                    id="edit-paymentStatus"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    <option value="free">Free</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="failed">Failed</option>
+                    <option value="refunded">Refunded</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="edit-paymentAmount"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Payment Amount
+                  </label>
+                  <input
+                    type="number"
+                    id="edit-paymentAmount"
+                    min="0"
+                    step="0.01"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Additional Information
+              </h4>
+              <div class="grid grid-cols-1 gap-4">
+                <div>
+                  <label
+                    for="edit-dietaryRestrictions"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Dietary Restrictions
+                  </label>
+                  <textarea
+                    id="edit-dietaryRestrictions"
+                    rows="2"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  ></textarea>
+                </div>
+                <div>
+                  <label
+                    for="edit-specialRequests"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Special Requests
+                  </label>
+                  <textarea
+                    id="edit-specialRequests"
+                    rows="2"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="mb-6">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Emergency Contact
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label
+                    for="edit-emergencyName"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-emergencyName"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-emergencyPhone"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="edit-emergencyPhone"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="edit-emergencyRelationship"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    Relationship
+                  </label>
+                  <input
+                    type="text"
+                    id="edit-emergencyRelationship"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-4 flex justify-end gap-3">
+              <button
+                type="button"
+                id="cancel-edit"
+                class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
