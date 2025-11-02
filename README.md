@@ -52,9 +52,9 @@ npm run build
 npm run dev
 ```
 
-4. Open `src/index.html` in your browser or use a local server:
+4. Open `index.html` in your browser or use a local server:
 ```bash
-npx serve src
+npx serve .
 ```
 
 ## Project Structure
@@ -85,7 +85,7 @@ npx serve src
 
 ## Environment Variables
 
-Make sure to configure your API endpoint in `src/js/config.js`:
+Make sure to configure your API endpoint in `js/config.js`:
 
 ```javascript
 export const API_BASE_URL = 'your-api-url';

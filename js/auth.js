@@ -29,13 +29,13 @@ const AUTH = {
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
-    window.location.href = "/src/login.html";
+    window.location.href = "/login.html";
   },
 
   // Check authentication and redirect if needed
   requireAuth() {
     if (!this.isAuthenticated()) {
-      window.location.href = "/src/login.html";
+      window.location.href = "/login.html";
       return false;
     }
     return true;

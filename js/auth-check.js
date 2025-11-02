@@ -6,7 +6,7 @@ import AUTH from "./auth.js";
   // Check if user is authenticated
   if (!AUTH.isAuthenticated()) {
     // Redirect to login page
-    window.location.href = "/src/login.html";
+    window.location.href = "/login";
     return;
   }
 
