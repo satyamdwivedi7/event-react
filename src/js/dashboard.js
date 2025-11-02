@@ -16,6 +16,8 @@ class Dashboard {
         this.loadRecentEvents(),
         this.loadUpcomingEvents(),
       ]);
+      // Initialize chart after data is loaded
+      this.initializeChart();
     } catch (error) {
       console.error("Dashboard initialization error:", error);
       UIUtils.showToast("Failed to load dashboard data", "error");
@@ -26,12 +28,24 @@ class Dashboard {
     try {
       // Fetch all events for the organizer
       const eventsResponse = await API.getAllEvents();
+      
+      // API returns { success: true, data: [...] }
       const events = eventsResponse.data || [];
+      
+      // Get current user ID
+      const userId = this.user._id || this.user.id;
 
       // Filter events by current user (organizer)
-      const myEvents = events.filter(
-        (event) => event.organizer === this.user.id || event.organizer._id === this.user.id
-      );
+      // Handle cases where organizer is null, a string ID, or a populated object
+      const myEvents = events.filter((event) => {
+        if (!event.organizer) return false;
+        
+        const organizerId = typeof event.organizer === 'object' 
+          ? event.organizer._id 
+          : event.organizer;
+        
+        return organizerId === userId;
+      });
 
       // Calculate statistics
       const totalEvents = myEvents.length;
@@ -53,6 +67,20 @@ class Dashboard {
       this.updateStatCard("totalParticipants", totalParticipants);
       this.updateStatCard("revenue", UIUtils.formatCurrency(totalRevenue));
       this.updateStatCard("upcomingEvents", upcomingEvents);
+
+      // Update next event date
+      const nextEvent = myEvents
+        .filter((event) => UIUtils.isUpcoming(event.startDate))
+        .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))[0];
+      
+      const nextEventElement = document.getElementById("nextEventDate");
+      if (nextEventElement) {
+        if (nextEvent) {
+          nextEventElement.innerHTML = `Next: <span class="font-medium">${UIUtils.formatDate(nextEvent.startDate)}</span>`;
+        } else {
+          nextEventElement.innerHTML = `<span class="text-gray-500 dark:text-gray-500">No upcoming events</span>`;
+        }
+      }
     } catch (error) {
       console.error("Error loading statistics:", error);
     }
@@ -69,11 +97,20 @@ class Dashboard {
     try {
       const response = await API.getAllEvents();
       const events = response.data || [];
+      
+      // Get current user ID
+      const userId = this.user._id || this.user.id;
 
       // Filter events by current user
-      const myEvents = events.filter(
-        (event) => event.organizer === this.user.id || event.organizer._id === this.user.id
-      );
+      const myEvents = events.filter((event) => {
+        if (!event.organizer) return false;
+        
+        const organizerId = typeof event.organizer === 'object' 
+          ? event.organizer._id 
+          : event.organizer;
+        
+        return organizerId === userId;
+      });
 
       // Sort by creation date (most recent first)
       const recentEvents = myEvents
@@ -135,9 +172,23 @@ class Dashboard {
     try {
       const response = await API.getAllEvents();
       const events = response.data || [];
+      
+      // Get current user ID
+      const userId = this.user._id || this.user.id;
+
+      // Filter events by current user first, then filter upcoming
+      const myEvents = events.filter((event) => {
+        if (!event.organizer) return false;
+        
+        const organizerId = typeof event.organizer === 'object' 
+          ? event.organizer._id 
+          : event.organizer;
+        
+        return organizerId === userId;
+      });
 
       // Filter upcoming events
-      const upcomingEvents = events
+      const upcomingEvents = myEvents
         .filter((event) => UIUtils.isUpcoming(event.startDate))
         .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
         .slice(0, 5);
@@ -192,6 +243,116 @@ class Dashboard {
     `
       )
       .join("");
+  }
+
+  async initializeChart() {
+    try {
+      const chartCanvas = document.getElementById("registrationChart");
+      if (!chartCanvas) return;
+
+      const response = await API.getAllEvents();
+      const events = response.data || [];
+      
+      // Get current user ID
+      const userId = this.user._id || this.user.id;
+
+      // Filter events by current user
+      const myEvents = events.filter((event) => {
+        if (!event.organizer) return false;
+        
+        const organizerId = typeof event.organizer === 'object' 
+          ? event.organizer._id 
+          : event.organizer;
+        
+        return organizerId === userId;
+      });
+
+      // Get registration data for the last 6 months
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const currentDate = new Date();
+      const last6Months = [];
+      const registrationCounts = [];
+
+      // Generate labels and counts for last 6 months
+      for (let i = 5; i >= 0; i--) {
+        const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+        const monthLabel = `${monthNames[date.getMonth()]} ${date.getFullYear().toString().slice(-2)}`;
+        last6Months.push(monthLabel);
+
+        // Count registrations for this month
+        const count = myEvents.filter(event => {
+          const eventDate = new Date(event.createdAt || event.startDate);
+          return eventDate.getMonth() === date.getMonth() && 
+                 eventDate.getFullYear() === date.getFullYear();
+        }).reduce((sum, event) => sum + (event.totalRegistrations || 0), 0);
+
+        registrationCounts.push(count);
+      }
+
+      const ctx = chartCanvas.getContext("2d");
+      
+      // Check if chart already exists and destroy it
+      if (window.dashboardChart) {
+        window.dashboardChart.destroy();
+      }
+
+      window.dashboardChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: last6Months,
+          datasets: [
+            {
+              label: "Registrations",
+              data: registrationCounts,
+              borderColor: "rgb(59, 130, 246)",
+              backgroundColor: "rgba(59, 130, 246, 0.1)",
+              tension: 0.4,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              backgroundColor: "rgba(17, 24, 39, 0.95)",
+              titleColor: "rgb(255, 255, 255)",
+              bodyColor: "rgb(229, 231, 235)",
+              borderColor: "rgba(75, 85, 99, 0.5)",
+              borderWidth: 1,
+              padding: 12,
+              displayColors: false,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: "rgb(156, 163, 175)",
+                precision: 0,
+              },
+              grid: {
+                color: "rgba(156, 163, 175, 0.1)",
+              },
+            },
+            x: {
+              ticks: {
+                color: "rgb(156, 163, 175)",
+              },
+              grid: {
+                color: "rgba(156, 163, 175, 0.1)",
+              },
+            },
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Error initializing chart:", error);
+    }
   }
 }
 

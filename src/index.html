@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="output.css" rel="stylesheet" />
     <script defer src="./js/toggleSidebar.js"></script>
     <script type="module" src="./js/auth-check.js"></script>
-    <script defer src="./js/chart.js"></script>
     <script type="module" src="./js/dashboard.js"></script>
     <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -194,11 +193,6 @@
                 </div>
               </div>
             </div>
-            <div class="mt-4">
-              <div class="text-sm text-green-600 dark:text-green-400">
-                <span class="font-medium">+2</span> from last month
-              </div>
-            </div>
           </div>
         </div>
 
@@ -218,11 +212,6 @@
                     <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
                   </svg>
                 </div>
-              </div>
-            </div>
-            <div class="mt-4">
-              <div class="text-sm text-green-600 dark:text-green-400">
-                <span class="font-medium">+15%</span> from last month
               </div>
             </div>
           </div>
@@ -247,11 +236,6 @@
                 </div>
               </div>
             </div>
-            <div class="mt-4">
-              <div class="text-sm text-green-600 dark:text-green-400">
-                <span class="font-medium">+8%</span> from last month
-              </div>
-            </div>
           </div>
         </div>
 
@@ -274,8 +258,8 @@
               </div>
             </div>
             <div class="mt-4">
-              <div class="text-sm text-gray-600 dark:text-gray-400">
-                Next: <span class="font-medium">Feb 15, 2025</span>
+              <div id="nextEventDate" class="text-sm text-gray-600 dark:text-gray-400">
+                <!-- Next event date will be loaded dynamically -->
               </div>
             </div>
           </div>

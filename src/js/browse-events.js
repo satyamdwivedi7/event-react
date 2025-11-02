@@ -179,7 +179,7 @@ class BrowseEventsPage {
         : "FREE";
 
     return `
-      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+      <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex flex-col h-full">
         <div class="flex items-start justify-between mb-3">
           <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
             ${UIUtils.getEventIcon(event.category)} ${event.title}
@@ -197,7 +197,7 @@ class BrowseEventsPage {
           ${event.description}
         </p>
 
-        <div class="space-y-2 mb-4">
+        <div class="space-y-2 mb-4 flex-grow">
           <p class="text-sm text-gray-600 dark:text-gray-300">
             📅 ${UIUtils.formatDateTime(event.startDate)}
           </p>
@@ -219,20 +219,22 @@ class BrowseEventsPage {
           }
         </div>
 
-        ${registrationStatus.canRegister
-          ? `<button
-              data-event-id="${event._id}"
-              class="register-btn w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Register Now
-            </button>`
-          : `<button
-              disabled
-              class="w-full px-4 py-2 text-sm font-medium text-gray-400 bg-gray-200 rounded-md cursor-not-allowed dark:bg-gray-700"
-            >
-              ${registrationStatus.message}
-            </button>`
-        }
+        <div class="mt-auto">
+          ${registrationStatus.canRegister
+            ? `<button
+                data-event-id="${event._id}"
+                class="register-btn w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Register Now
+              </button>`
+            : `<button
+                disabled
+                class="w-full px-4 py-2 text-sm font-medium text-gray-400 bg-gray-200 rounded-md cursor-not-allowed dark:bg-gray-700"
+              >
+                ${registrationStatus.message}
+              </button>`
+          }
+        </div>
       </div>
     `;
   }
