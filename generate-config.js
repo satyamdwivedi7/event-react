@@ -1,16 +1,22 @@
 // Script to generate config.js from .env file
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
-// Read .env file
-const envPath = path.join(__dirname, '.env');
-const envContent = fs.readFileSync(envPath, 'utf8');
+// Get BASE_URI from environment variable (works with Vercel)
+// Priority: 1. process.env.BASE_URI (Vercel env), 2. .env file, 3. fallback
+let baseUri = process.env.BASE_URI || 'https://event--management.vercel.app/api';
 
-// Parse BASE_URI from .env
-let baseUri = 'https://event--management.vercel.app/api'; // default fallback
-const match = envContent.match(/BASE_URI=(.+)/);
-if (match) {
-  baseUri = match[1].trim();
+// If not found in process.env, try reading from .env file directly
+if (!process.env.BASE_URI) {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    const match = envContent.match(/BASE_URI=(.+)/);
+    if (match) {
+      baseUri = match[1].trim();
+    }
+  }
 }
 
 // Generate config.js content
@@ -76,7 +82,7 @@ export default API_CONFIG;
 `;
 
 // Write to config.js
-const configPath = path.join(__dirname, 'js', 'config.js');
+const configPath = path.join(__dirname, 'public', 'js', 'config.js');
 fs.writeFileSync(configPath, configContent, 'utf8');
 
 console.log('✅ config.js generated successfully from .env');

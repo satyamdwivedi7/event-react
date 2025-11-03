@@ -1,4 +1,5 @@
 // API Configuration
+// This file is auto-generated from .env - DO NOT EDIT MANUALLY
 const API_CONFIG = {
   BASE_URL: "https://event--management.vercel.app/api",
   TIMEOUT: 30000,
