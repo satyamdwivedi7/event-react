@@ -33,33 +33,21 @@ class EditParticipant {
 
   async loadParticipant() {
     try {
-      console.log('Loading participant with ID:', this.registrationId);
-      
       const response = await API.getRegistration(this.registrationId);
-      console.log('Full API Response:', JSON.stringify(response, null, 2));
-      console.log('Response type:', typeof response);
-      console.log('Response keys:', Object.keys(response || {}));
       
       // Handle backend response structure: { success: true, data: {...} }
       if (response.success && response.data) {
         this.registration = response.data;
-        console.log('✅ Using response.data (success wrapper structure)');
       } else if (response.data) {
         this.registration = response.data;
-        console.log('✅ Using response.data (data wrapper structure)');
       } else if (response.registration) {
         this.registration = response.registration;
-        console.log('✅ Using response.registration');
       } else if (response._id) {
         // Direct registration object
         this.registration = response;
-        console.log('✅ Using direct response (has _id)');
       } else {
-        console.error('❌ Invalid response structure:', response);
         throw new Error('Invalid response structure from API');
       }
-      
-      console.log('Parsed Registration data:', JSON.stringify(this.registration, null, 2));
       
       if (!this.registration || !this.registration._id) {
         throw new Error('No valid registration data received');
@@ -68,11 +56,6 @@ class EditParticipant {
       this.populateForm();
     } catch (error) {
       console.error('Error loading participant:', error);
-      console.error('Error details:', {
-        message: error.message,
-        stack: error.stack,
-        registrationId: this.registrationId
-      });
       
       UIUtils.showToast('Failed to load participant details: ' + error.message, 'error');
       

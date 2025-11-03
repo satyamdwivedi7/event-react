@@ -38,12 +38,9 @@ class APIClient {
 
     if (body) {
       config.body = JSON.stringify(body);
-      console.log("Request Body (stringified):", config.body);
     }
 
     const url = `${this.baseURL}${endpoint}`;
-    console.log("Full Request URL:", url);
-    console.log("Request Config:", config);
 
     try {
       const controller = new AbortController();
@@ -56,10 +53,6 @@ class APIClient {
 
       clearTimeout(timeoutId);
 
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
-      console.log('Response headers:', [...response.headers.entries()]);
-
       // Handle 401 Unauthorized
       if (response.status === 401) {
         AUTH.logout();
@@ -68,16 +61,12 @@ class APIClient {
 
       // Check if response is JSON
       const contentType = response.headers.get("content-type");
-      console.log('Content-Type:', contentType);
 
       // Try to get response text first
       const responseText = await response.text();
-      console.log('Raw response text (first 1000 chars):', responseText.substring(0, 1000));
 
       // If not OK status, handle error
       if (!response.ok) {
-        console.error('Error response received. Status:', response.status);
-        
         // Try to parse as JSON for error message
         if (contentType && contentType.includes("application/json")) {
           try {
@@ -93,19 +82,15 @@ class APIClient {
 
       // Parse successful response
       if (!contentType || !contentType.includes("application/json")) {
-        console.error('Non-JSON response received:', responseText.substring(0, 500));
         throw new Error(`Invalid response from server (${response.status}). Expected JSON but got ${contentType || 'unknown'}`);
       }
 
       const data = JSON.parse(responseText);
-      console.log('Parsed JSON response:', data);
-
       return data;
     } catch (error) {
       if (error.name === "AbortError") {
         throw new Error("Request timeout. Please try again.");
       }
-      console.error('Request error:', error);
       throw error;
     }
   }
@@ -199,22 +184,10 @@ class APIClient {
 
   // ===== REGISTRATION ENDPOINTS =====
   async createRegistration(registrationData) {
-    console.log("API.createRegistration called with:", JSON.stringify(registrationData, null, 2));
-    console.log("Endpoint:", API_CONFIG.ENDPOINTS.REGISTRATIONS);
     return this.post(API_CONFIG.ENDPOINTS.REGISTRATIONS, registrationData);
   }
 
   async getRegistration(id) {
-    console.log('====================================');
-    console.log('API.getRegistration called with ID:', id);
-    console.log('ID type:', typeof id);
-    console.log('ID length:', id?.length);
-    console.log('Endpoint will be:', API_CONFIG.ENDPOINTS.REGISTRATION_BY_ID(id));
-    console.log('Base URL:', this.baseURL);
-    console.log('Full URL will be:', `${this.baseURL}${API_CONFIG.ENDPOINTS.REGISTRATION_BY_ID(id)}`);
-    console.log('====================================');
-    
-    // Try without authentication first since your backend route doesn't require it
     return this.get(API_CONFIG.ENDPOINTS.REGISTRATION_BY_ID(id), false);
   }
 

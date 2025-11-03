@@ -177,10 +177,6 @@ class ParticipantsManager {
       ".grid.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3"
     );
     
-    console.log("renderCards called");
-    console.log("Cards container found:", !!cardsContainer);
-    console.log("Filtered registrations count:", this.filteredRegistrations.length);
-    
     if (!cardsContainer) {
       console.error("Cards container not found!");
       return;
@@ -206,12 +202,6 @@ class ParticipantsManager {
 
   // Create participant card HTML
   createParticipantCard(registration) {
-    console.log('Creating card for registration:', {
-      _id: registration._id,
-      participant: registration.participant,
-      event: registration.event
-    });
-    
     const initials = `${registration.participant.firstName[0]}${registration.participant.lastName[0]}`;
     const avatarColors = [
       "bg-blue-500",
@@ -385,8 +375,6 @@ class ParticipantsManager {
         e.preventDefault();
         e.stopPropagation();
         const registrationId = e.currentTarget.getAttribute("data-registration-id");
-        console.log('View button clicked for registration ID:', registrationId);
-        console.log('Navigating to:', `./view-participant.html?id=${registrationId}`);
         window.location.href = `./view-participant.html?id=${registrationId}`;
       });
     });
@@ -396,8 +384,6 @@ class ParticipantsManager {
         e.preventDefault();
         e.stopPropagation();
         const registrationId = e.currentTarget.getAttribute("data-registration-id");
-        console.log('Edit button clicked for registration ID:', registrationId);
-        console.log('Navigating to:', `./edit-participant.html?id=${registrationId}`);
         window.location.href = `./edit-participant.html?id=${registrationId}`;
       });
     });
@@ -677,64 +663,43 @@ class ParticipantsManager {
   // Open edit modal
   openEditModal(registrationId) {
     try {
-      console.log("=== openEditModal START ===");
-      console.log("openEditModal called with ID:", registrationId);
-      
       const registration = this.filteredRegistrations.find(
         (r) => r._id === registrationId
       );
       
       if (!registration) {
-        console.error("Registration not found with ID:", registrationId);
         UIUtils.showToast("Registration not found", "error");
         return;
       }
 
-      console.log("Found registration:", registration);
       this.selectedRegistration = registration;
 
       const modal = document.getElementById("edit-modal");
       const form = document.getElementById("edit-form");
       
-      console.log("Edit modal element:", modal);
-      console.log("Edit form element:", form);
-      
       if (!modal) {
-        console.error("Edit modal element not found!");
         UIUtils.showToast("Edit modal element not found in DOM", "error");
         return;
       }
       
       if (!form) {
-        console.error("Edit form element not found!");
         UIUtils.showToast("Edit form element not found in DOM", "error");
         return;
       }
 
       // Populate form with registration data
-      console.log("Populating edit form...");
       this.populateEditForm(registration);
-      console.log("Edit form populated");
 
       // Show modal - just remove hidden class, CSS will handle the rest
-      console.log("Removing hidden class...");
       modal.classList.remove("hidden");
-      console.log("Adding flex display...");
       modal.style.display = "flex"; // Use flex instead of block
       modal.style.alignItems = "center";
       modal.style.justifyContent = "center";
-      console.log("Edit modal should be visible now");
-      console.log("Edit modal classes:", modal.className);
-      console.log("Edit modal display:", modal.style.display);
-      console.log("Edit modal computed style display:", window.getComputedStyle(modal).display);
 
       // Setup modal listeners
-      console.log("Setting up edit modal event listeners...");
       this.setupEditModalListeners();
-      console.log("=== openEditModal END ===");
     } catch (error) {
       console.error("Error in openEditModal:", error);
-      console.error("Error stack:", error.stack);
       UIUtils.showToast("Error opening edit modal: " + error.message, "error");
     }
   }

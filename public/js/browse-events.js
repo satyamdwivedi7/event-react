@@ -61,17 +61,7 @@ class BrowseEventsPage {
       UIUtils.showLoading("events-container");
 
       const response = await API.getAllEvents();
-      console.log("API Response:", response);
       const events = response.data || [];
-      console.log("Total events fetched:", events.length);
-      
-      // Check first event structure for debugging
-      if (events.length > 0) {
-        console.log("First event ID field check:");
-        console.log("  _id:", events[0]._id);
-        console.log("  id:", events[0].id);
-        console.log("  Full event:", events[0]);
-      }
 
       // Filter: upcoming events only and public
       // Note: Showing all upcoming events regardless of status for now
@@ -84,19 +74,8 @@ class BrowseEventsPage {
           ? new Date(event.registrationDeadline) > new Date()
           : true;
         
-        console.log(`Event: ${event.title}`, {
-          isUpcoming,
-          isPublic,
-          // isPublished,
-          notPastRegistrationDeadline,
-          startDate: event.startDate,
-          status: event.status,
-        });
-        
         return isUpcoming && isPublic && notPastRegistrationDeadline;
       });
-
-      console.log("Filtered events:", this.allEvents.length);
 
       // Sort by start date
       this.allEvents.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
@@ -436,21 +415,11 @@ class BrowseEventsPage {
         }
       }
 
-      console.log("===== REGISTRATION DEBUG =====");
-      console.log("Full Selected Event Object:", this.selectedEvent);
-      console.log("Event Object Keys:", Object.keys(this.selectedEvent));
-      console.log("Selected Event._id:", this.selectedEvent._id);
-      console.log("Selected Event.id:", this.selectedEvent.id);
-      console.log("EventId field in registrationData:", registrationData.eventId);
-      console.log("Registration Data BEFORE fix:", JSON.stringify(registrationData, null, 2));
-
       // CRITICAL FIX: Ensure event ID is present
       // The backend expects "eventId" field (not "event")
       const eventId = this.selectedEvent._id || this.selectedEvent.id;
-      console.log("Extracted Event ID:", eventId);
       
       if (!eventId) {
-        console.error("CRITICAL: No event ID found!");
         UIUtils.showToast("Error: Event information is missing. Please try again.", "error");
         submitButton.disabled = false;
         submitButton.textContent = "Register";
@@ -459,14 +428,9 @@ class BrowseEventsPage {
       
       // Force set the event ID (backend expects "eventId" not "event")
       registrationData.eventId = eventId;
-      
-      console.log("Registration Data AFTER fix:", JSON.stringify(registrationData, null, 2));
-      console.log("===== END DEBUG =====");
 
       // Submit registration
       const response = await API.createRegistration(registrationData);
-      
-      console.log("Registration Response:", response);
 
       if (response.success) {
         UIUtils.showToast("Successfully registered for the event!", "success");
@@ -479,11 +443,6 @@ class BrowseEventsPage {
       }
     } catch (error) {
       console.error("Error registering for event:", error);
-      console.error("Error details:", {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      });
       
       // Check for specific error types
       if (error.message && (error.message.toLowerCase().includes("already registered") || 
