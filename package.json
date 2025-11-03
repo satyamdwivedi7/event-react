@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Event Management System - A comprehensive platform for creating and managing events",
   "scripts": {
-    "build": "npx tailwindcss -i ./input.css -o ./output.css --minify",
-    "dev": "npx tailwindcss -i ./input.css -o ./output.css --watch",
+    "generate-config": "node generate-config.js",
+    "build:css": "npx tailwindcss -i ./public/input.css -o ./public/output.css --minify",
+    "build": "npm run generate-config && npm run build:css",
+    "dev": "npx tailwindcss -i ./public/input.css -o ./public/output.css --watch",
     "vercel-build": "npm run build"
   },
   "keywords": [
@@ -15,5 +17,8 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }
