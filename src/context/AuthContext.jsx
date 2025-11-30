@@ -31,11 +31,23 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await apiService.login(credentials);
+      console.log('Login response:', response);
+      
       // Handle response - API returns token and user at root level
       const token = response.token || response.data?.token;
       const user = response.user || response.data?.user;
-      authService.setAuth(token, user);
-      setUser(user);
+      
+      console.log('Extracted token:', token);
+      console.log('Extracted user:', user);
+      
+      if (token && user) {
+        authService.setAuth(token, user);
+        setUser(user);
+        console.log('User saved to localStorage:', user);
+      } else {
+        console.error('Missing token or user in response');
+      }
+      
       return response;
     } catch (error) {
       throw error;

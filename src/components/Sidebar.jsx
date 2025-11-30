@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   const menuItems = [
     {
-      path: '/',
+      path: '/admin/dashboard',
       name: 'Dashboard',
       icon: (
         <svg
@@ -33,8 +33,8 @@ const Sidebar = () => {
       ),
     },
     {
-      path: '/events',
-      name: 'Events',
+      path: '/admin/events',
+      name: 'Manage Events',
       icon: (
         <svg
           className="w-5 h-5"
@@ -48,8 +48,8 @@ const Sidebar = () => {
       ),
     },
     {
-      path: '/browse-events',
-      name: 'Register for Events',
+      path: '/',
+      name: 'View Public Site',
       icon: (
         <svg
           className="w-5 h-5"
@@ -63,7 +63,7 @@ const Sidebar = () => {
       ),
     },
     {
-      path: '/profile',
+      path: '/admin/profile',
       name: 'Profile',
       icon: (
         <svg

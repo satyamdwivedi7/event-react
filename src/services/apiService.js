@@ -144,32 +144,31 @@ class APIService {
     const endpoint = queryString
       ? `${API_CONFIG.ENDPOINTS.EVENTS}?${queryString}`
       : API_CONFIG.ENDPOINTS.EVENTS;
-    return this.get(endpoint);
+    // Public endpoint - no auth required
+    return this.get(endpoint, { includeAuth: false });
   }
 
-  async getEventById(id) {
-    return this.get(API_CONFIG.ENDPOINTS.EVENT_BY_ID(id));
+  async getEventById(id, requireAuth = false) {
+    return this.get(API_CONFIG.ENDPOINTS.EVENT_BY_ID(id), { includeAuth: requireAuth });
   }
 
   async createEvent(eventData) {
-    return this.post(API_CONFIG.ENDPOINTS.EVENTS, eventData);
+    return this.post(API_CONFIG.ENDPOINTS.CREATE_EVENT, eventData);
   }
 
   async updateEvent(id, eventData) {
-    return this.put(API_CONFIG.ENDPOINTS.EVENT_BY_ID(id), eventData);
+    return this.put(API_CONFIG.ENDPOINTS.UPDATE_EVENT(id), eventData);
   }
 
   async deleteEvent(id) {
-    return this.delete(API_CONFIG.ENDPOINTS.EVENT_BY_ID(id));
+    return this.delete(API_CONFIG.ENDPOINTS.DELETE_EVENT(id));
   }
 
-  async publishEvent(id) {
-    return this.patch(API_CONFIG.ENDPOINTS.PUBLISH_EVENT(id));
-  }
-
-  // Registration API methods
-  async getRegistrations() {
-    return this.get(API_CONFIG.ENDPOINTS.REGISTRATIONS);
+  // Registration API methods (Public - no auth)
+  async createRegistration(registrationData) {
+    return this.post(API_CONFIG.ENDPOINTS.CREATE_REGISTRATION, registrationData, {
+      includeAuth: false,
+    });
   }
 
   async getEventRegistrations(eventId) {
@@ -180,41 +179,8 @@ class APIService {
     return this.get(API_CONFIG.ENDPOINTS.USER_REGISTRATIONS(userId));
   }
 
-  async createRegistration(registrationData) {
-    return this.post(API_CONFIG.ENDPOINTS.REGISTRATIONS, registrationData);
-  }
-
-  async updateRegistration(id, registrationData) {
-    return this.put(API_CONFIG.ENDPOINTS.UPDATE_REGISTRATION(id), registrationData);
-  }
-
-  async updateRegistrationStatus(id, status) {
-    return this.patch(API_CONFIG.ENDPOINTS.UPDATE_REGISTRATION_STATUS(id), { status });
-  }
-
-  async checkInRegistration(id) {
-    return this.patch(API_CONFIG.ENDPOINTS.CHECK_IN(id));
-  }
-
-  async cancelRegistration(id) {
-    return this.delete(API_CONFIG.ENDPOINTS.CANCEL_REGISTRATION(id));
-  }
-
-  // Analytics API methods
-  async getEventAnalytics(eventId) {
-    return this.get(API_CONFIG.ENDPOINTS.EVENT_ANALYTICS(eventId));
-  }
-
-  async getAnalyticsSummary(eventId) {
-    return this.get(API_CONFIG.ENDPOINTS.ANALYTICS_SUMMARY(eventId));
-  }
-
-  async generateAnalytics(eventId) {
-    return this.post(API_CONFIG.ENDPOINTS.GENERATE_ANALYTICS(eventId));
-  }
-
-  async trackView(eventId) {
-    return this.post(API_CONFIG.ENDPOINTS.TRACK_VIEW(eventId));
+  async getRegistrationById(id) {
+    return this.get(API_CONFIG.ENDPOINTS.REGISTRATION_BY_ID(id));
   }
 }
 

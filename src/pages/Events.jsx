@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Layout from '../components/Layout';
 import apiService from '../services/apiService';
 
@@ -30,9 +31,10 @@ const Events = () => {
       try {
         await apiService.deleteEvent(id);
         setEvents(events.filter((e) => e._id !== id));
+        toast.success('Event deleted successfully');
       } catch (error) {
         console.error('Error deleting event:', error);
-        alert('Failed to delete event');
+        toast.error('Failed to delete event');
       }
     }
   };
@@ -58,7 +60,7 @@ const Events = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-white">My Events</h1>
           <Link
-            to="/create-event"
+            to="/admin/events/create"
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
             Create Event
@@ -145,13 +147,13 @@ const Events = () => {
                 </div>
                 <div className="flex space-x-2">
                   <Link
-                    to={`/event/${event._id}`}
+                    to={`/admin/events/${event._id}`}
                     className="flex-1 px-4 py-2 bg-blue-600 text-white text-center rounded hover:bg-blue-700 transition"
                   >
                     View
                   </Link>
                   <Link
-                    to={`/event/${event._id}/participants`}
+                    to={`/admin/events/${event._id}/participants`}
                     className="flex-1 px-4 py-2 bg-gray-700 text-white text-center rounded hover:bg-gray-600 transition"
                   >
                     Participants

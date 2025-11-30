@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
-import APITestPanel from '../components/APITestPanel';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,9 +18,10 @@ const Login = () => {
 
     try {
       await login({ email, password });
-      // Small delay to show loading state
-      setTimeout(() => navigate('/'), 500);
+      toast.success('Login successful!');
+      setTimeout(() => navigate('/admin/dashboard'), 500);
     } catch (err) {
+      toast.error(err.message || 'Failed to login');
       setError(err.message || 'Failed to login');
     } finally {
       setLoading(false);
@@ -32,8 +33,13 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-lg">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Sign in to your account
+            Admin Login
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            <Link to="/" className="text-blue-400 hover:text-blue-300">
+              ← Back to Public Site
+            </Link>
+          </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
@@ -88,7 +94,7 @@ const Login = () => {
 
           <div className="text-center">
             <Link
-              to="/register"
+              to="/admin/register"
               className="font-medium text-blue-400 hover:text-blue-300"
             >
               Don't have an account? Register
@@ -96,7 +102,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-      <APITestPanel />
     </div>
   );
 };

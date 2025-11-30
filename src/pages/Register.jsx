@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
-import APITestPanel from '../components/APITestPanel';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -47,13 +47,16 @@ const Register = () => {
       // If registration includes token (auto-login), go to dashboard
       // Otherwise, redirect to login page
       if (response.token) {
+        toast.success('Registration successful! Redirecting to dashboard...');
         setSuccess('Registration successful! Redirecting to dashboard...');
-        setTimeout(() => navigate('/'), 1500);
+        setTimeout(() => navigate('/admin/dashboard'), 1500);
       } else {
+        toast.success('Registration successful! Redirecting to login...');
         setSuccess('Registration successful! Redirecting to login...');
-        setTimeout(() => navigate('/login'), 1500);
+        setTimeout(() => navigate('/admin/login'), 1500);
       }
     } catch (err) {
+      toast.error(err.message || 'Failed to register');
       setError(err.message || 'Failed to register');
     } finally {
       setLoading(false);
@@ -65,8 +68,13 @@ const Register = () => {
       <div className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg shadow-lg">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Create your account
+            Admin Registration
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            <Link to="/" className="text-blue-400 hover:text-blue-300">
+              ← Back to Public Site
+            </Link>
+          </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
@@ -172,7 +180,7 @@ const Register = () => {
 
           <div className="text-center">
             <Link
-              to="/login"
+              to="/admin/login"
               className="font-medium text-blue-400 hover:text-blue-300"
             >
               Already have an account? Sign in
@@ -180,7 +188,6 @@ const Register = () => {
           </div>
         </form>
       </div>
-      <APITestPanel />
     </div>
   );
 };

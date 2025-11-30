@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import Layout from '../components/Layout';
 import apiService from '../services/apiService';
 import { useAuth } from '../context/AuthContext';
@@ -56,10 +57,10 @@ const Profile = () => {
       const userData = response.data?.user || response.user || response.data || formData;
       updateUserData(userData);
       setEditing(false);
-      alert('Profile updated successfully!');
+      toast.success('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert(error.message || 'Failed to update profile');
+      toast.error(error.message || 'Failed to update profile');
     } finally {
       setLoading(false);
     }
@@ -69,7 +70,7 @@ const Profile = () => {
     e.preventDefault();
 
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      alert('New passwords do not match');
+      toast.error('New passwords do not match');
       return;
     }
 
@@ -85,10 +86,10 @@ const Profile = () => {
         newPassword: '',
         confirmPassword: '',
       });
-      alert('Password changed successfully!');
+      toast.success('Password changed successfully!');
     } catch (error) {
       console.error('Error changing password:', error);
-      alert(error.message || 'Failed to change password');
+      toast.error(error.message || 'Failed to change password');
     } finally {
       setLoading(false);
     }
