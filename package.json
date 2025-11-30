@@ -2,23 +2,35 @@
   "name": "event-management-system",
   "version": "1.0.0",
   "description": "Event Management System - A comprehensive platform for creating and managing events",
+  "type": "module",
   "scripts": {
-    "generate-config": "node generate-config.js",
-    "build:css": "npx tailwindcss -i ./public/input.css -o ./public/output.css --minify",
-    "build": "npm run generate-config && npm run build:css",
-    "dev": "npx tailwindcss -i ./public/input.css -o ./public/output.css --watch",
-    "vercel-build": "npm run build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate-config": "node generate-config.js"
   },
   "keywords": [
     "event-management",
+    "react",
     "tailwindcss"
   ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "tailwindcss": "^3.4.17"
-  },
   "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0",
     "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.4.32",
+    "autoprefixer": "^10.4.16"
   }
 }

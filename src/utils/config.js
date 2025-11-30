@@ -1,7 +1,6 @@
 // API Configuration
-// This file is auto-generated from .env - DO NOT EDIT MANUALLY
 const API_CONFIG = {
-  BASE_URL: "https://event--management.vercel.app/api",
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || "https://event--management.vercel.app/api",
   TIMEOUT: 30000,
   ENDPOINTS: {
     // User endpoints
@@ -48,11 +47,6 @@ const API_CONFIG = {
     // Speaker endpoints
     SPEAKERS: "/speakers",
     SPEAKER_BY_ID: (id) => `/speakers/${id}`,
-    SPEAKERS_BY_EXPERTISE: (expertise) => `/speakers/expertise/${expertise}`,
-    SPEAKER_SESSIONS: (speakerId) => `/speakers/${speakerId}/sessions/upcoming`,
-
-    // Health check
-    HEALTH: "/health",
   },
 };
 
